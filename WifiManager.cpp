@@ -43,6 +43,25 @@ QString WifiManager::lastError() const
     return m_last_error;
 }
 
+bool WifiManager::isScanning() const
+{
+    return m_scanning;
+}
+
+void WifiManager::setScanning(bool scanning)
+{
+    if(scanning != m_scanning)
+    {
+        m_scanning = scanning;
+        emit scanningChanged();
+    }
+}
+
+QAbstractListModel *WifiManager::networks() const
+{
+    return m_networks;
+}
+
 bool WifiManager::connect(WifiConfiguration *config)
 {
     Q_UNUSED(config);
