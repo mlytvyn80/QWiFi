@@ -1,6 +1,6 @@
 CONFIG += qt
 
-TEMPLATE = lib
+TEMPLATE = app
 DEFINES += QTWIFI_LIBRARY
 
 CONFIG += c++11
@@ -19,15 +19,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     WifiConfiguration.cpp \
     WifiConnectionHandler.cpp \
-    WifiManager.cpp
+    WifiManager.cpp \
+    WlanInterfaceInfo.cpp \
+    main.cpp \
+    utils.cpp
 
 HEADERS += \
     WifiConfiguration.h \
     WifiConnectionHandler.h \
-    WifiManager.h
+    WifiManager.h \
+    WlanInterfaceInfo.h \
+    utils.h
 
 # Default rules for deployment.
 unix {
     target.path = /usr/lib
 }
+
+win32 {
+    LIBS += -lwlanapi -lole32
+}
+
 !isEmpty(target.path): INSTALLS += target
